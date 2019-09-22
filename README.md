@@ -1,4 +1,4 @@
-# kilokaloria
+# Catering-System
 
 ## Project setup
 ```
