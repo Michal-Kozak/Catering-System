@@ -1,7 +1,10 @@
 <template>
   <div class="board">
+    
   <sideMenu> </sideMenu>
+   
   <dietList> </dietList>
+  
       </div>
 </template>
 
