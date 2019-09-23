@@ -2,7 +2,8 @@
 
 <template>
   <div id="app" >
-    
+  
+    <sideMenu> </sideMenu>
     <board>
   
    </board>
@@ -11,14 +12,14 @@
 </template>
 
 <script>
-
+import sideMenu from './components/sidemenu.vue'
 import board from './components/board.vue'
 
 export default {
   name: 'app',
   components: {
     board,
-    
+    sideMenu,
   }
 }
 </script>
@@ -28,6 +29,7 @@ body{
   margin: 0;
 }
 #app {
+  display: flex;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

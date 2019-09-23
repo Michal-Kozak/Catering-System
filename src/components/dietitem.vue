@@ -3,7 +3,7 @@
                  <el-select 
                   size="small"
                 class="product__name"
-                v-model="value"
+                v-model="item.value"
                 filterable
                 remote
                 reserve-keyword
@@ -20,8 +20,15 @@
                 :label="item.label"
                 :value="item.value">
                 </el-option>
+                  
             </el-select>             
-                    <el-input-number v-model="num"  :min="1"  size="small" ></el-input-number>
+                    <el-input-number v-model="item.num"  :min="1"  size="small" ></el-input-number>
+                    <el-button 
+                    type="success" 
+                    icon="el-icon-check" 
+                    circle 
+                    @click="addItem"
+                    ></el-button>
                 </div>            
 </template>
 
@@ -30,6 +37,11 @@
   export default {
     data() {
       return {
+        item: {
+                    value: '',
+                    num: '1',
+                   
+                },
         num: 1,
         input: '',
         options: [],
@@ -46,6 +58,9 @@
       });
     },
     methods: {
+      addItem() {
+        this.$emit('addItem', this.item);
+    },
       remoteMethod(query) {
         if (query !== '') {
           this.loading = true;

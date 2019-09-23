@@ -16,7 +16,59 @@
             </div>
             </div>
 
-            <dietitem> </dietitem>
+            <dietitem
+             @addItem="addItem($event)"
+             > </dietitem>
+             
+             <div class="addTask__button">
+              <el-button type="primary" icon="el-icon-plus" round style="width:60%;"></el-button>
+              </div>
+            
+        </div>
+
+        <div class="calculator__row">
+            
+            <div class="calculator__type">
+                  
+                <div class="list__name">
+           <h1>1500KCAL</h1>
+                </div>
+           <div >
+               <el-button type="primary" icon="el-icon-edit" circle></el-button>
+                <el-button type="danger" icon="el-icon-delete" circle></el-button>
+                <el-button type="primary" icon="el-icon-plus" circle></el-button>
+            </div>
+            </div>
+
+            <dietitem
+             @addItem="addItem($event)"
+             > </dietitem>
+             
+             <div class="addTask__button">
+              <el-button type="primary" icon="el-icon-plus" round style="width:60%;"></el-button>
+              </div>
+            
+        </div>
+
+        <div class="calculator__row">
+            
+            <div class="calculator__type">
+                  
+                <div class="list__name">
+           <h1>1500KCAL</h1>
+                </div>
+           <div >
+               <el-button type="primary" icon="el-icon-edit" circle></el-button>
+                <el-button type="danger" icon="el-icon-delete" circle></el-button>
+                <el-button type="primary" icon="el-icon-plus" circle></el-button>
+            </div>
+            </div>
+
+            <dietitem
+             @addItem="addItem($event)"
+             > </dietitem>
+             
+             
              <div class="addTask__button">
               <el-button type="primary" icon="el-icon-plus" round style="width:60%;"></el-button>
               </div>
@@ -36,6 +88,11 @@ import dietitem from './dietitem.vue'
      components: {
     dietitem,
   },
+  methods: {
+      addItem(item) {
+      this.$emit('addItem', item); 
+    },
+    }
   }
  
 </script>
@@ -45,7 +102,7 @@ p{
 }
 .calculator{
     width: 100%;
-    height: 100vh;
+    height: 70vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -92,6 +149,7 @@ p{
 .calculator__product{
     display: flex;
     justify-content: space-around;
+    align-items: center;
     width: 100%;
     margin: 10px 0px 10px 0px;  
     padding: 10px 0px 10px 0px;
