@@ -65,7 +65,7 @@ export default {
     align-items: center;
 }
 .diet__score{
-  width: 60%;
+  width: 50%;
   padding: 20px;
 }
 .diet__summary{

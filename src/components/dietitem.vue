@@ -5,7 +5,7 @@
                 class="product__name"
                 v-model="item.value"
                 filterable
-                required
+                
                 remote
                 reserve-keyword
                 placeholder="Składnik"
@@ -18,6 +18,7 @@
                 <el-option
                 v-for="item in options"
                 :key="item.value"
+                required
                 :label="item.label"
                 :value="item.value">
                 </el-option>

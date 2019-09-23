@@ -42,7 +42,7 @@
             <div class="calculator__type">
                   
                 <div class="list__name"  contenteditable="true">
-           <h1>Random Title</h1>
+           <h1>Random</h1>
                 </div>
            <div >
               
