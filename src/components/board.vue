@@ -1,16 +1,20 @@
 <template>
-  <div class="board"> 
+  <div class="board" > 
+    <el-collapse v-model="activeName" accordion class="collapse--style" >
+  <el-collapse-item title="Lista" name="1"> 
+<div class="diet__summary">
+<li v-for="item in items">
+    {{item.value}} {{ item.num}}
+  </li>
+</div>
+  </el-collapse-item>
+
+</el-collapse>
   <dietList
   @addItem="addItem($event)"
   > </dietList>
   <div class="diet__score">
 
-<div class="diet__summary">
-<h1> Lista </h1>
-<li v-for="item in items">
-    {{item.value}} {{ item.num}}
-  </li>
-</div>
     </div>
       </div>
 </template>
@@ -28,7 +32,7 @@ export default {
   data() {
 
       return {
-        caloriesSummary: '',
+       activeName: '1',
         num: '',
         
       items: [
@@ -63,6 +67,9 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.collapse--style{
+  width: 80%;
 }
 .diet__score{
   width: 50%;

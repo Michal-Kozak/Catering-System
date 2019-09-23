@@ -4,8 +4,7 @@
                   size="small"
                 class="product__name"
                 v-model="item.value"
-                filterable
-                
+                filterable   
                 remote
                 reserve-keyword
                 placeholder="Składnik"
