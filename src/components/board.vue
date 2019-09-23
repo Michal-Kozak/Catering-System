@@ -4,11 +4,11 @@
   @addItem="addItem($event)"
   > </dietList>
   <div class="diet__score">
-    <el-button type="info" @click="calculate()" >Oblicz</el-button> 
+
 <div class="diet__summary">
 <h1> Lista </h1>
- <li v-for="item in items">
-    {{ item.item.value }} {{ item.item.num}}
+<li v-for="item in items">
+    {{item.value}} {{ item.num}}
   </li>
 </div>
     </div>
@@ -26,21 +26,33 @@ export default {
     dietList,
   },
   data() {
+
       return {
+        caloriesSummary: '',
+        num: '',
+        
       items: [
-      
+     
     ]
       }
       },
   methods: {
-      addItem(item) {
-        this.items.push({item});
-        console.log(item.value);
-      
-    },
-    calculate(){
-      
-    }
+     addItem(item) {
+       this.items.push(item)
+       
+       
+        console.log(item.value)
+
+        this.items.forEach(item => {
+         if (this.item.value == items.item.value){
+           
+         } else {
+           
+           console.log('zle');
+         }
+       })
+     },
+  
     }
 }
 </script>
