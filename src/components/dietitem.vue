@@ -5,6 +5,7 @@
                 class="product__name"
                 v-model="item.value"
                 filterable
+                required
                 remote
                 reserve-keyword
                 placeholder="Składnik"
@@ -49,7 +50,9 @@
         list: [],
         loading: false,
         states: ["Kurczak", "Cebula", "Pomidor",
-        "Ananas", "Jajko", "Marchew",]
+        "Ananas", "Jajko", "Marchew", "Wieprzowina", "Wołowina", "Baranina",
+        "Brokuł", "Kapusta", "Czosnek", "Por", "Szczypiorek", "Pieprz", "Rukola", "Seler", 
+        "Burak", "Papryka", "Sól", "Dynia", "Arbuz", "Rzepa", "Rzodkiewka", "Chrzan", "Trufle", "Pieczarki",]
       }
     },
     mounted() {
