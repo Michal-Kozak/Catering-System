@@ -10,7 +10,6 @@
            <h1>1500KCAL</h1>
                 </div>
            <div >
-               <el-button type="primary" icon="el-icon-edit" circle></el-button>
                 <el-button type="danger" icon="el-icon-delete" circle></el-button>
                 <el-button type="primary" icon="el-icon-plus" circle></el-button>
             </div>
@@ -30,8 +29,7 @@
              > </dietitem>
              <dietitem
              @addItem="addItem($event)"
-             > </dietitem>
-
+             > </dietitem> 
              
              <div class="addTask__button">
               <el-button type="primary" icon="el-icon-plus" round style="width:60%;"></el-button>
@@ -43,11 +41,11 @@
             
             <div class="calculator__type">
                   
-                <div class="list__name">
-           <h1>1500KCAL</h1>
+                <div class="list__name"  contenteditable="true">
+           <h1>Random Title</h1>
                 </div>
            <div >
-               <el-button type="primary" icon="el-icon-edit" circle></el-button>
+              
                 <el-button type="danger" icon="el-icon-delete" circle></el-button>
                 <el-button type="primary" icon="el-icon-plus" circle></el-button>
             </div>
@@ -69,6 +67,7 @@
              @addItem="addItem($event)"
              > </dietitem>
              
+             
              <div class="addTask__button">
               <el-button type="primary" icon="el-icon-plus" round style="width:60%;"></el-button>
               </div>
@@ -79,11 +78,11 @@
             
             <div class="calculator__type">
                   
-                <div class="list__name">
-           <h1>1500KCAL</h1>
+                <div class="list__name"  contenteditable="true">
+           <h1> Vegan Diet</h1>
                 </div>
            <div >
-               <el-button type="primary" icon="el-icon-edit" circle></el-button>
+          
                 <el-button type="danger" icon="el-icon-delete" circle></el-button>
                 <el-button type="primary" icon="el-icon-plus" circle></el-button>
             </div>
@@ -104,6 +103,8 @@
              <dietitem
              @addItem="addItem($event)"
              > </dietitem>
+            
+             
              
              
              <div class="addTask__button">
@@ -139,16 +140,19 @@ p{
 }
 .calculator{
     width: 100%;
-    height: 70vh;
+    min-height: 80vh;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
 .calculator__row{  
     width: 30%;
+    min-width: 300px;
     display: flex;
     flex-direction: column;
     margin: 0px 15px 0px 15px;
+    margin: 20px 10px  20px 10px;
 }
 .calculator__type{
     height: 5%;

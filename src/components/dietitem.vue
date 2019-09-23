@@ -64,6 +64,7 @@
       addItem() {
         this.$emit('addItem', this.item);
     },
+   
       remoteMethod(query) {
         if (query !== '') {
           this.loading = true;

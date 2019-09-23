@@ -44,8 +44,8 @@ export default {
         console.log(item.value)
 
         this.items.forEach(item => {
-         if (this.item.value == items.item.value){
-           
+         if (item.value !== item.value){
+          
          } else {
            
            console.log('zle');
@@ -62,9 +62,10 @@ export default {
   width: 90%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 .diet__score{
-  width: 100%;
+  width: 60%;
   padding: 20px;
 }
 .diet__summary{
