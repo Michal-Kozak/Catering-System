@@ -1,6 +1,7 @@
 <template>
   <div class="calculator__product">
-                <el-input placeholder="Please input" 
+    <div class="calculator__qty">
+                <el-input placeholder="Produkt" 
                 v-model="item.value"
                 size="small"
                 class="product__name"
@@ -8,13 +9,20 @@
                 
                 ></el-input>
 
-                    <el-input-number v-model="item.num"  :min="1"  size="small" ></el-input-number>
+                    <el-input-number v-model="item.num"  :min="1"  size="small"  ></el-input-number>
                     <el-button 
                     type="success" 
                     icon="el-icon-check" 
                     circle 
+                  
                     @click="addItem"
+                    
                     ></el-button>
+                    </div>
+                    <div class="calories">
+                       <p>Kaloryczność </p><el-input-number v-model="item.calories"  :min="1"  size="small"  ></el-input-number>
+                    
+                    </div>
                 </div>            
 </template>
 
@@ -26,7 +34,9 @@
         item: {
                     value: '',
                     num: '1',
-                    callories: '',                 
+                    calories: '', 
+                    
+                    sum: '',
                 },
         num: 1,
         input: '',
@@ -47,9 +57,13 @@
     },
     methods: {
       addItem() {
-       this.item.callories = this.item.num * 5;
+      
+        
         this.$emit('addItem', this.item);
+        
     },
+    caloriescalc(){
+      this.$emit('caloriescalc', this.item)},
    
       remoteMethod(query) {
         if (query !== '') {
@@ -69,5 +83,20 @@
   }
 </script>
 <style>
+.calculator__qty{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.calories{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
 
+}
+.calories button{
+  margin-left: 15px;
+}
 </style>

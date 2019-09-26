@@ -14,8 +14,12 @@
   <dietList
   @addItem="addItem($event)"
   > </dietList>
- 
+ <h1> Dodawanie - Działa (Nazwa musi być napisana tak samo, wielkość liter ma znaczenie!)<br>
+      Kalulator Kalorii - Wpisac ilość gram a niżej ile kcal jest w 100g produktu)<br> 
+      Dodawanie list oraz kolejnych produktów w trakcie wdrażania 
+ </h1>
       </div>
+      
 </template>
 
 <script>
@@ -33,6 +37,7 @@ export default {
       return {
        activeName: '1',
         num: '',
+       qtySummary: '',
         
       items: [
      
@@ -42,18 +47,19 @@ export default {
   methods: {
      addItem(item) {
        this.items.push(item)
-       
-       
-        console.log(item.value)
 
-        this.items.forEach(item => {
-         if (item.value !== item.value){
+        var total = this.items.length - 1;
+        var i = 0;
+        var qtySummary = item.num;
+       
+
+        for(; i < total; i++) {
+          if(this.items[i].value == item.value){
+              this.items[i].num = this.items[i].num + item.num;
+              this.items.pop()
           
-         } else {
-           
-           console.log('zle');
-         }
-       })
+               } 
+           }
      },
   
     }
