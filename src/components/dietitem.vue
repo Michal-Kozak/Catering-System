@@ -1,28 +1,13 @@
 <template>
   <div class="calculator__product">
-                 <el-select 
-                  size="small"
-                class="product__name"
+                <el-input placeholder="Please input" 
                 v-model="item.value"
-                filterable   
-                remote
-                reserve-keyword
-                placeholder="Składnik"
-                :remote-method="remoteMethod"
-                :loading="loading"
-                 loading-text="ladowanie"
-                 no-match-text="Brak produktów"
-                 no-data-text="Brak produktów"
-                >
-                <el-option
-                v-for="item in options"
-                :key="item.value"
-                required
-                :label="item.label"
-                :value="item.value">
-                </el-option>
-                  
-            </el-select>             
+                size="small"
+                class="product__name"
+                
+                
+                ></el-input>
+
                     <el-input-number v-model="item.num"  :min="1"  size="small" ></el-input-number>
                     <el-button 
                     type="success" 
@@ -41,12 +26,12 @@
         item: {
                     value: '',
                     num: '1',
-                   
+                    callories: '',                 
                 },
         num: 1,
         input: '',
         options: [],
-        value: [],
+        callories: '',
         list: [],
         loading: false,
         states: ["Kurczak", "Cebula", "Pomidor",
@@ -62,6 +47,7 @@
     },
     methods: {
       addItem() {
+       this.item.callories = this.item.num * 5;
         this.$emit('addItem', this.item);
     },
    

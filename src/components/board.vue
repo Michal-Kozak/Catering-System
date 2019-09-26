@@ -7,15 +7,14 @@
     {{item.value}} {{ item.num}}
   </li>
 </div>
+
   </el-collapse-item>
 
 </el-collapse>
   <dietList
   @addItem="addItem($event)"
   > </dietList>
-  <div class="diet__score">
-
-    </div>
+ 
       </div>
 </template>
 

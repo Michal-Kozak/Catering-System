@@ -34,84 +34,79 @@
              <div class="addTask__button">
               <el-button type="primary" icon="el-icon-plus" round style="width:60%;"></el-button>
               </div>
+              <p> {{calloriesSummary}} </p>
             
         </div>
-
-        <div class="calculator__row">
+ <div class="calculator__row">
             
             <div class="calculator__type">
                   
-                <div class="list__name"  contenteditable="true">
-           <h1>Random</h1>
+                <div class="list__name" contenteditable="true">
+           <h1>1500KCAL</h1>
                 </div>
            <div >
+                <el-button type="danger" icon="el-icon-delete" circle></el-button>
+                <el-button type="primary" icon="el-icon-plus" circle></el-button>
+            </div>
+            </div>
+
+            <dietitem
+             @addItem="addItem($event)"
+             > </dietitem>
+             <dietitem
+             @addItem="addItem($event)"
+             > </dietitem>
+             <dietitem
+             @addItem="addItem($event)"
+             > </dietitem>
+             <dietitem
+             @addItem="addItem($event)"
+             > </dietitem>
+             <dietitem
+             @addItem="addItem($event)"
+             > </dietitem> 
+             
+             <div class="addTask__button">
+              <el-button type="primary" icon="el-icon-plus" round style="width:60%;"></el-button>
+              </div>
+            
+        </div>
+         <div class="calculator__row">
+            
+            <div class="calculator__type">
+                  
+                <div class="list__name" contenteditable="true">
+           <h1>1500KCAL</h1>
+                </div>
+           <div >
+                <el-button type="danger" icon="el-icon-delete" circle></el-button>
+                <el-button type="primary" icon="el-icon-plus" circle></el-button>
+            </div>
+            </div>
+
+            <dietitem
+             @addItem="addItem($event)"
+             > </dietitem>
+             <dietitem
+             @addItem="addItem($event)"
+             > </dietitem>
+             <dietitem
+             @addItem="addItem($event)"
+             > </dietitem>
+             <dietitem
+             @addItem="addItem($event)"
+             > </dietitem>
+             <dietitem
+             @addItem="addItem($event)"
+             > </dietitem> 
+             
+             <div class="addTask__button">
+              <el-button type="primary" icon="el-icon-plus" round style="width:60%;"></el-button>
+              </div>
               
-                <el-button type="danger" icon="el-icon-delete" circle></el-button>
-                <el-button type="primary" icon="el-icon-plus" circle></el-button>
-            </div>
-            </div>
-
-            <dietitem
-             @addItem="addItem($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             > </dietitem>
-             
-             
-             <div class="addTask__button">
-              <el-button type="primary" icon="el-icon-plus" round style="width:60%;"></el-button>
-              </div>
             
-        </div>
-
-        <div class="calculator__row">
-            
-            <div class="calculator__type">
-                  
-                <div class="list__name"  contenteditable="true">
-           <h1> Vegan Diet</h1>
-                </div>
-           <div >
-          
-                <el-button type="danger" icon="el-icon-delete" circle></el-button>
-                <el-button type="primary" icon="el-icon-plus" circle></el-button>
-            </div>
-            </div>
-
-            <dietitem
-             @addItem="addItem($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             > </dietitem>
-            
-             
-             
-             
-             <div class="addTask__button">
-              <el-button type="primary" icon="el-icon-plus" round style="width:60%;"></el-button>
-              </div>
-            
-        </div>
+        </div>      
+        
  
         
          
@@ -125,13 +120,29 @@ import dietitem from './dietitem.vue'
   export default {
      components: {
     dietitem,
-  },
+  }, data() {
+
+      return {
+       activeName: '1',
+        num: '',
+        calloriesSummary: '',
+      items: [
+     
+    ]
+        
+      }
+      },
   methods: {
-      addItem(item) {
-      this.$emit('addItem', item); 
-    },
+     
+    addItem(item) {
+        this.$emit('addItem', item); 
+       this.items.push(item)
+
+        this.calloriesSummary = +this.calloriesSummary + item.callories;
+       }
+     },
     }
-  }
+  
  
 </script>
 <style>
@@ -199,7 +210,7 @@ p{
     
 }
 .product__name{
-    width: 40%;
+    width: 40%!important;
 
     
 }
