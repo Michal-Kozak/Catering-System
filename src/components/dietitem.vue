@@ -1,20 +1,20 @@
 <template>
-  <div class="calculator__product">
-    <div class="calculator__qty">
+  <div class="calculator__product" v-bind:class="{ 'calculator__disabled': disabled }">
+    <div class="calculator__qty" >
                 <el-input placeholder="Produkt" 
                 v-model="item.value"
                 size="small"
                 class="product__name"
-                
+                v-bind:class="{ 'calculator__disabled--input': disabled }"
                 
                 ></el-input>
 
-                    <el-input-number v-model="item.num"  :min="1"  size="small"  ></el-input-number>
+                    <el-input-number v-model="item.num"  :min="1"  size="small" v-bind:class="{ 'calculator__disabled--input': disabled }" ></el-input-number>
                     <el-button 
                     type="success" 
                     icon="el-icon-check" 
                     circle 
-                  
+                  v-bind:class="{ 'calculator__disabled--add': disabled }"
                     @click="addItem"
                     
                     ></el-button>
@@ -31,6 +31,7 @@
   export default {
     data() {
       return {
+        disabled: false,
         item: {
                     value: '',
                     num: '1',
@@ -56,10 +57,8 @@
     },
     methods: {
       addItem() {
-      
-        
-        this.$emit('addItem', this.item);
-        
+      this.disabled = true;
+        this.$emit('addItem', this.item);    
     },
     caloriescalc(){
       this.$emit('caloriescalc', this.item)},
@@ -98,4 +97,14 @@
 .calories button{
   margin-left: 15px;
 }
+.calculator__disabled{
+  background-color: gainsboro;
+  opacity: 0.7;
+  pointer-events: none;
+}
+.calculator__disabled--add{
+  display: none;
+  opacity: 0.4;
+}
+
 </style>
