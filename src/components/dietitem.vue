@@ -35,7 +35,6 @@
                     value: '',
                     num: '1',
                     calories: '', 
-                    
                     sum: '',
                 },
         num: 1,

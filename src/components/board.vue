@@ -3,8 +3,10 @@
     <el-collapse v-model="activeName" accordion class="collapse--style" >
   <el-collapse-item title="Lista" name="1"> 
 <div class="diet__summary">
-<li v-for="item in items">
-    {{item.value}} {{ item.num}}
+<li v-for="item in items" class="diet__list">
+  <div class="product__summary">
+    <p>{{item.value}}</p> <p> {{item.sum}}</p>
+  </div>
   </li>
 </div>
 
@@ -33,35 +35,30 @@ export default {
     dietList,
   },
   data() {
-
       return {
        activeName: '1',
         num: '',
-       qtySummary: '',
-        
-      items: [
-     
-    ]
+       qtySummary: '0',
+      items: [ {value: 'Nazwa:', sum: 'Waga:'} ],
       }
       },
   methods: {
      addItem(item) {
        this.items.push(item)
+        var total = this.items.length -1;
+        var i = 0;  
+          for(; i < total; i++) {
+            if(this.items[i].value == item.value){
+                
+              item.sum = +this.items[i].sum + item.num;
+              this.items[i].sum = item.sum;
+              this.items.pop();
 
-        var total = this.items.length - 1;
-        var i = 0;
-        var qtySummary = item.num;
-       
-
-        for(; i < total; i++) {
-          if(this.items[i].value == item.value){
-              this.items[i].num = this.items[i].num + item.num;
-              this.items.pop()
-          
-               } 
+                  } else {
+                    item.sum = item.num;
+                  }
            }
      },
-  
     }
 }
 </script>
@@ -83,5 +80,18 @@ export default {
 .diet__summary{
   background-color: grey;
   color: white;
+}
+.diet__list{
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product__summary{
+  display: flex;
+  width: 30%;
+  justify-content: center;
+  align-items: center;
+
 }
 </style>
