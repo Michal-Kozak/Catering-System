@@ -13,13 +13,17 @@
   </el-collapse-item>
 
 </el-collapse>
+<div class="calculator__listOfLists">
   <dietList
+  v-for="(list, index) in lists" 
+  v-bind:key="list.id"
+  v-on:removeList="lists.splice(index, 1)"
+  v-bind:is="list"
+  @addNewList="addNewList($event)"
   @addItem="addItem($event)"
   > </dietList>
- <h1> Dodawanie - Działa (Nazwa musi być napisana tak samo, wielkość liter ma znaczenie!)<br>
-      Kalulator Kalorii - Wpisac ilość gram a niżej ile kcal jest w 100g produktu)<br> 
-      Dodawanie list oraz kolejnych produktów w trakcie wdrażania 
- </h1>
+</div>
+ 
       </div>
       
 </template>
@@ -36,6 +40,7 @@ export default {
   },
   data() {
       return {
+        lists: ['dietList'],
        activeName: '1',
         num: '',
        qtySummary: '0',
@@ -43,6 +48,9 @@ export default {
       }
       },
   methods: {
+    addNewList(){
+        this.lists.push('dietList')
+    },
      addItem(item) {
        this.items.push(item)
         var total = this.items.length -1;
@@ -85,6 +93,13 @@ export default {
   list-style: none;
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+.calculator__listOfLists{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
 }
 .product__summary{

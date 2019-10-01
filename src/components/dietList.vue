@@ -7,123 +7,34 @@
             <div class="calculator__type">
                   
                 <div class="list__name" contenteditable="true">
-           <h1>1500KCAL</h1>
+           <h1>Name Of Diet</h1>
                 </div>
            <div >
-                <el-button type="danger" icon="el-icon-delete" circle></el-button>
-                <el-button type="primary" icon="el-icon-plus" circle></el-button>
+                <el-button type="danger" icon="el-icon-delete" circle @click="removeList"></el-button>
+                <el-button type="primary" icon="el-icon-plus" circle @click="addNewList" ></el-button>
             </div>
             </div>
 
             <dietitem
+             v-for="task in tasks" 
+             v-bind:key="task.id"
+             v-bind:is="task"
              @addItem="addItem($event)"
              @caloriescalc="caloriescalc($event)"
              > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             @caloriescalc="caloriescalc($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             @caloriescalc="caloriescalc($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             @caloriescalc="caloriescalc($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             @caloriescalc="caloriescalc($event)"
-             > </dietitem> 
+            
              
              <div class="addTask__button">
-              <el-button type="primary" icon="el-icon-plus" round style="width:60%;"></el-button>
+              <el-button type="primary" 
+              icon="el-icon-plus" 
+              round style="width:60%;"
+              @click="addNewItem"
+              ></el-button>
               </div>
               <p> {{calloriesSummary}} KCAL </p>
             
         </div>
-  <div class="calculator__row">
-            
-            <div class="calculator__type">
-                  
-                <div class="list__name" contenteditable="true">
-           <h1>1500KCAL</h1>
-                </div>
-           <div >
-                <el-button type="danger" icon="el-icon-delete" circle></el-button>
-                <el-button type="primary" icon="el-icon-plus" circle></el-button>
-            </div>
-            </div>
-
-            <dietitem
-             @addItem="addItem($event)"
-             @caloriescalc="caloriescalc($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             @caloriescalc="caloriescalc($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             @caloriescalc="caloriescalc($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             @caloriescalc="caloriescalc($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             @caloriescalc="caloriescalc($event)"
-             > </dietitem> 
-             
-             <div class="addTask__button">
-              <el-button type="primary" icon="el-icon-plus" round style="width:60%;"></el-button>
-              </div>
-              
-            
-        </div>
-        
-  <div class="calculator__row">
-            
-            <div class="calculator__type">
-                  
-                <div class="list__name" contenteditable="true">
-           <h1>1500KCAL</h1>
-                </div>
-           <div >
-                <el-button type="danger" icon="el-icon-delete" circle></el-button>
-                <el-button type="primary" icon="el-icon-plus" circle></el-button>
-            </div>
-            </div>
-
-            <dietitem
-             @addItem="addItem($event)"
-             @caloriescalc="caloriescalc($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             @caloriescalc="caloriescalc($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             @caloriescalc="caloriescalc($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             @caloriescalc="caloriescalc($event)"
-             > </dietitem>
-             <dietitem
-             @addItem="addItem($event)"
-             @caloriescalc="caloriescalc($event)"
-             > </dietitem> 
-             
-             <div class="addTask__button">
-              <el-button type="primary" icon="el-icon-plus" round style="width:60%;"></el-button>
-              </div>
-             
-            
-        </div>
-        
+  
          
     </div>
     
@@ -138,6 +49,7 @@ import dietitem from './dietitem.vue'
   }, data() {
 
       return {
+          tasks: ['dietitem'],
        activeName: '1',
         num: '',
         calloriesSummary: '',
@@ -148,7 +60,15 @@ import dietitem from './dietitem.vue'
       }
       },
   methods: {
-     
+     addNewItem(){
+         this.tasks.push('dietitem')
+     },
+     addNewList(){
+        this.$emit('addNewList'); 
+     },
+     removeList(){
+        this.$emit('removeList',); 
+     },
     addItem(item) {
       
         const calloriessum = item.num * (item.calories /100);
@@ -167,23 +87,16 @@ p{
     margin: 5px;
 }
 .calculator{
-    width: 100%;
-    min-height: 80vh;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
-.calculator__row{  
     width: 25%;
-    min-width: 300px;
+  min-width: 300px;
     display: flex;
     flex-direction: column;
     margin: 0px 15px 0px 15px;
     margin: 20px 10px  20px 10px;
 }
+
 .calculator__type{
-    height: 5%;
+    min-height: 5%;
     padding: 5px 0px 5px 0px;
     margin:5px 0px 5px 0px;
     border: 2px solid #409EFF;
