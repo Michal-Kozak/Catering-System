@@ -3,7 +3,7 @@
 <template>
   <div id="app" >
   
-    <sideMenu> </sideMenu>
+  
     <board>
   
    </board>

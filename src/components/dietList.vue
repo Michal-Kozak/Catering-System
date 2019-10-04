@@ -67,7 +67,7 @@ import dietitem from './dietitem.vue'
         this.$emit('addNewList'); 
      },
      removeList(){
-        this.$emit('removeList',); 
+        this.$emit('removeList'); 
      },
     addItem(item) {
       

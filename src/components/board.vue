@@ -17,8 +17,8 @@
   <dietList
   v-for="(list, index) in lists" 
   v-bind:key="list.id"
-  v-on:removeList="lists.splice(index, 1)"
   v-bind:is="list"
+  @removeList="removeList(index)"
   @addNewList="addNewList($event)"
   @addItem="addItem($event)"
   > </dietList>
@@ -42,6 +42,7 @@ export default {
       return {
         lists: ['dietList'],
        activeName: '1',
+
         num: '',
        qtySummary: '0',
       items: [ {value: 'Nazwa:', sum: 'Waga:'} ],
@@ -49,7 +50,12 @@ export default {
       },
   methods: {
     addNewList(){
+        console.log(this.lists)
         this.lists.push('dietList')
+    },
+    removeList(index){
+      this.lists = this.lists.splice(index, 1);
+      console.log(this.lists.index)
     },
      addItem(item) {
        this.items.push(item)
@@ -73,7 +79,7 @@ export default {
 
 <style>
 .board{
-  width: 90%;
+  width:100%;
     display: flex;
     flex-direction: column;
     align-items: center;

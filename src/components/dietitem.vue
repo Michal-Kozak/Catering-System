@@ -1,13 +1,29 @@
 <template>
   <div class="calculator__product" v-bind:class="{ 'calculator__disabled': disabled }">
     <div class="calculator__qty" >
-                <el-input placeholder="Produkt" 
-                v-model="item.value"
-                size="small"
-                class="product__name"
-                v-bind:class="{ 'calculator__disabled--input': disabled }"
-                
-                ></el-input>
+                <el-select
+    v-model="item.value"
+    v-bind:class="{ 'calculator__disabled--input': disabled }"
+     size="small"
+    filterable
+    remote
+    reserve-keyword
+    placeholder="Produkt"
+    
+    :remote-method="remoteMethod"
+    :loading="loading"
+    loading-text="ladowanie"
+     
+    no-data-text="Brak produktów">
+    <el-option
+    
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+      
+    </el-option>
+  </el-select>
 
                     <el-input-number v-model="item.num"  :min="1"  size="small" v-bind:class="{ 'calculator__disabled--input': disabled }" ></el-input-number>
                     <el-button 
