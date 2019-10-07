@@ -72,7 +72,8 @@ import dietitem from './dietitem.vue'
     addItem(item) {
       
         const calloriessum = item.num * (item.calories /100);
-            this.calloriesSummary = +this.calloriesSummary + calloriessum;
+            this.calloriesSummary = Math.round(+this.calloriesSummary + calloriessum);
+            
         this.$emit('addItem', item); 
      
      this.items.push(item)    

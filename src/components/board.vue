@@ -18,7 +18,7 @@
   v-for="(list, index) in lists" 
   v-bind:key="list.id"
   v-bind:is="list"
-  @removeList="removeList(index)"
+  @removeList="removeList($event)"
   @addNewList="addNewList($event)"
   @addItem="addItem($event)"
   > </dietList>
@@ -53,10 +53,10 @@ export default {
         console.log(this.lists)
         this.lists.push('dietList')
     },
-    removeList(index){
-      this.lists = this.lists.splice(index, 1);
-      console.log(this.lists.index)
-    },
+    removeList: function(list) {
+      console.log(this.lists)
+  this.lists.splice(this.lists.index, 1);
+},
      addItem(item) {
        this.items.push(item)
         var total = this.items.length -1;

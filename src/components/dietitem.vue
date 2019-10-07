@@ -54,6 +54,26 @@
                     calories: '', 
                     sum: '',
                 },
+                caloriesList: [
+                  {value:"Kurczak", calories:'75'},
+                  
+                  {value:"Cebula", calories:'35'},
+                  
+                  {value:"Pomidor", calories:'20'},
+                  
+                  {value:"Jajko", calories:'82'},
+                  
+                  {value:"Marchew", calories:'25'},
+                  
+                  {value:"Wieprzowina", calories:'242'},
+                  
+                  {value:"Wołowina", calories:'112'},
+                  
+                  {value:"Papryka", calories:'32'},
+                  
+                  {value:"Dynia", calories:'33'},
+
+                ],
         num: 1,
         input: '',
         options: [],
@@ -74,7 +94,19 @@
     methods: {
       addItem() {
       this.disabled = true;
-        this.$emit('addItem', this.item);    
+     var total = 999;
+        var i = 0;  
+          for(; i < total; i++) {
+            if(this.caloriesList[i].value == this.item.value){
+                this.item.calories = this.caloriesList[i].calories;
+                console.log(this.item.caloriers)
+                console.log(this.caloriesList[i].calories)
+                this.$emit('addItem', this.item); 
+                  }else {
+                    this.item.calories = this.item.calories;
+                    this.$emit('addItem', this.item); 
+                  }} 
+           
     },
     caloriescalc(){
       this.$emit('caloriescalc', this.item)},
