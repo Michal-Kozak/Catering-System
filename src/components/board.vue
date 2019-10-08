@@ -3,7 +3,7 @@
     <el-collapse v-model="activeName" accordion class="collapse--style" >
   <el-collapse-item title="Lista" name="1"> 
 <div class="diet__summary">
-<li v-for="item in items" class="diet__list">
+<li v-for="item in items" :key="item.index" class="diet__list">
   <div class="product__summary">
     <p>{{item.value}}</p> <p> {{item.sum}}</p>
   </div>
@@ -20,7 +20,6 @@
   v-bind:is="list"
   @removeList="removeList($event)"
   @addNewList="addNewList($event)"
-  @ProductLists="ProductLists($event)"
   @addItem="addItem($event)"
   > </dietList>
 </div>
@@ -66,10 +65,6 @@ export default {
         statesRef: statesRef
       },
   methods: {
-     ProductLists(states,caloriesList){
-        console.log(states)
-        console.log(caloriesList)
-     },
      submitProduct(){
        statesRef.push({value:this.productName, label: this.productName, calories: this.productCalories})
        
@@ -80,15 +75,18 @@ export default {
      removeProduct(key){
       statesRef.remove();
      },
+    
     addNewList(){
         console.log(this.lists)
         this.lists.push('dietList')
     },
+    
     removeList: function(list) {
       console.log(this.lists)
   this.lists.splice(this.lists.index, 1);
 },
-     addItem(item) {
+    
+    addItem(item) {
        this.items.push(item)
         var total = this.items.length -1;
         var i = 0;  

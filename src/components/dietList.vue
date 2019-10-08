@@ -21,7 +21,6 @@
              v-bind:is="task"
              @addItem="addItem($event)"
              @caloriescalc="caloriescalc($event)"
-             @ProductLists="ProductLists($event)"
              > </dietitem>
             
              
@@ -63,9 +62,6 @@ import dietitem from './dietitem.vue'
   methods: {
      addNewItem(){
          this.tasks.push('dietitem')
-     },
-     ProductLists(states, caloriesList){
-         this.$emit('ProductLists', states, caloriesList);
      },
      addNewList(){
         this.$emit('addNewList'); 

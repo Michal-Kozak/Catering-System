@@ -10,8 +10,6 @@
     reserve-keyword
     placeholder="Produkt"
     
-    :remote-method="remoteMethod"
-    :loading="loading"
     loading-text="ladowanie"
      
     no-data-text="Brak produktów">
@@ -53,31 +51,6 @@ import { statesRef } from '../firebase'
                     calories: '', 
                     sum: '',
                 },
-                caloriesList: [
-                  {value:"Kurczak", calories:'75'},
-                  
-                  {value:"Cebula", calories:'35'},
-                  
-                  {value:"Pomidor", calories:'20'},
-                  
-                  {value:"Jajko", calories:'82'},
-                  
-                  {value:"Marchew", calories:'25'},
-                  
-                  {value:"Wieprzowina", calories:'242'},
-                  
-                  {value:"Wołowina", calories:'112'},
-                  
-                  {value:"Papryka", calories:'32'},
-                  
-                  {value:"Dynia", calories:'33'},
-                  
-                  {value:"Ananas", calories:''},
-
-                ],
-                newProduct: '',
-                newCalories: '',
-
         num: 1,
         input: '',
         options: [],
@@ -99,11 +72,8 @@ import { statesRef } from '../firebase'
       
      
       addItem() {
-         this.$emit('ProductLists', this.statesRef, this.statesRef);
-
       this.disabled = true;
      var total = 999;
-     
         var i = 0;  
           for(; i < total; i++) {
             if(this.statesRef[i].value == this.item.value){
@@ -121,21 +91,7 @@ import { statesRef } from '../firebase'
     caloriescalc(){
       this.$emit('caloriescalc', this.item)},
    
-      remoteMethod(query) {
-        if (query !== '') {
-          this.loading = true;
-          setTimeout(() => {
-            this.loading = false;
-            this.options = this.list.filter(item => {
-              return item.label.toLowerCase()
-                .indexOf(query.toLowerCase()) > -1;
-            });
-          }, 200);
-        } else {
-          this.options = [];
-          x
-        }
-      }
+    
     }
   }
 </script>
