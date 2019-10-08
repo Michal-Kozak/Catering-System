@@ -16,14 +16,25 @@
 <div class="calculator__listOfLists">
   <dietList
   v-for="(list, index) in lists" 
-  v-bind:key="list.id"
+  v-bind:key="index"
   v-bind:is="list"
   @removeList="removeList($event)"
   @addNewList="addNewList($event)"
+  @ProductLists="ProductLists($event)"
   @addItem="addItem($event)"
   > </dietList>
 </div>
- 
+  <div>
+    <label>Produkt: </label>
+    <input type="text" v-model="productName"/>
+    <input type="number" v-model="productCalories"/>
+    <button @click="submitProduct()">ADD </button>
+    <ul>
+      <li v-for="states of statesRef" :key="states['.key']" style="list-style:none;"><P>Nazwa: <b>{{states.value}}</b> Kalorie: <b>{{states.calories}}</b></P> 
+      <button @click="removeProduct(states['.key'])">Usuń</button> 
+      </li>
+    </ul>
+  </div>
       </div>
       
 </template>
@@ -31,7 +42,7 @@
 <script>
 
 import dietList from './dietList.vue'
-
+import { statesRef } from '../firebase'
 
 export default {
   name: 'app',
@@ -41,14 +52,34 @@ export default {
   data() {
       return {
         lists: ['dietList'],
+        productName: '',
+        productCalories: '',
        activeName: '1',
-
+        product: '',
         num: '',
+        statesRef: '',
        qtySummary: '0',
       items: [ {value: 'Nazwa:', sum: 'Waga:'} ],
       }
       },
+      firebase: {
+        statesRef: statesRef
+      },
   methods: {
+     ProductLists(states,caloriesList){
+        console.log(states)
+        console.log(caloriesList)
+     },
+     submitProduct(){
+       statesRef.push({value:this.productName, label: this.productName, calories: this.productCalories})
+       
+       
+       console.log(statesRef)
+       
+     },
+     removeProduct(key){
+      statesRef.remove();
+     },
     addNewList(){
         console.log(this.lists)
         this.lists.push('dietList')

@@ -15,14 +15,14 @@
     loading-text="ladowanie"
      
     no-data-text="Brak produktów">
-    <el-option
-    
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-      
+       <el-option
+      v-for="states in statesRef"
+      :key="states.value"
+      :label="states.label"
+      :value="states.value"
+      :disabled="states.disabled">
     </el-option>
+ 
   </el-select>
 
                     <el-input-number v-model="item.num"  :min="1"  size="small" v-bind:class="{ 'calculator__disabled--input': disabled }" ></el-input-number>
@@ -34,16 +34,15 @@
                     @click="addItem"
                     
                     ></el-button>
-                    </div>
-                    <div class="calories">
-                       <p>Kaloryczność </p><el-input-number v-model="item.calories"  :min="1"  size="small"  ></el-input-number>
                     
+                   
                     </div>
+                   
                 </div>            
 </template>
 
 <script>
-
+import { statesRef } from '../firebase'
   export default {
     data() {
       return {
@@ -72,39 +71,50 @@
                   {value:"Papryka", calories:'32'},
                   
                   {value:"Dynia", calories:'33'},
+                  
+                  {value:"Ananas", calories:''},
 
                 ],
+                newProduct: '',
+                newCalories: '',
+
         num: 1,
         input: '',
         options: [],
         callories: '',
         list: [],
         loading: false,
-        states: ["Kurczak", "Cebula", "Pomidor",
-        "Ananas", "Jajko", "Marchew", "Wieprzowina", "Wołowina", "Baranina",
-        "Brokuł", "Kapusta", "Czosnek", "Por", "Szczypiorek", "Pieprz", "Rukola", "Seler", 
-        "Burak", "Papryka", "Sól", "Dynia", "Arbuz", "Rzepa", "Rzodkiewka", "Chrzan", "Trufle", "Pieczarki",]
+        statesRef: []
       }
     },
+    firebase: {
+        statesRef: statesRef
+      },
     mounted() {
-      this.list = this.states.map(item => {
+      this.list = this.statesRef.map(item => {
         return { value: item, label: item };
       });
     },
     methods: {
+      
+     
       addItem() {
+         this.$emit('ProductLists', this.statesRef, this.statesRef);
+
       this.disabled = true;
      var total = 999;
+     
         var i = 0;  
           for(; i < total; i++) {
-            if(this.caloriesList[i].value == this.item.value){
-                this.item.calories = this.caloriesList[i].calories;
+            if(this.statesRef[i].value == this.item.value){
+                this.item.calories = this.statesRef[i].calories;
                 console.log(this.item.caloriers)
-                console.log(this.caloriesList[i].calories)
+                console.log(this.statesRef[i].calories)
                 this.$emit('addItem', this.item); 
-                  }else {
-                    this.item.calories = this.item.calories;
-                    this.$emit('addItem', this.item); 
+                  }else if (this.statesRef[i].calories < 20){
+                    this.statesRef[i].calories = this.item.calories;
+
+                    console.log('test')
                   }} 
            
     },
@@ -123,6 +133,7 @@
           }, 200);
         } else {
           this.options = [];
+          x
         }
       }
     }

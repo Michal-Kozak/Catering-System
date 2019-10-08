@@ -9,6 +9,7 @@
    </board>
    
   </div>
+  
 </template>
 
 <script>
