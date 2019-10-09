@@ -1,157 +1,162 @@
 <template>
-  <div class="board" > 
+  <div class="board">
+    <router-link to="/productlist"> <el-button type="primary">Lista Produktów</el-button>  </router-link>
+    <el-collapse v-model="activeName" accordion class="collapse--style">
+      <el-collapse-item title="Lista" name="1">
+        <div class="diet__summary">
+          <li v-for="item in items" :key="item.index" class="diet__list">
+            <div class="product__summary">
+              <p>{{item.value}}</p>
+              <p>{{item.sum}}</p>
+            </div>
+          </li>
+        </div>
+      </el-collapse-item>
+    </el-collapse>
+    <div class="calculator__listOfLists">
+      <dietList
+        v-for="(list, index) in lists"
+        :key="index"
+        :list="list"
+        :index="index"
+        @removeList="removeList($event)"
+        @addNewList="addNewList($event)"
+        @addItem="addItem($event)"
+      ></dietList>
+    </div>
     <div>
-  <router-link to="/productlist"> <el-button type="primary">Lista Produktów</el-button>  </router-link>
+      <label>Produkt:</label>
+      <input type="text" v-model="productName" />
+      <input type="number" v-model="productCalories" />
+      <button @click="submitProduct()">ADD</button>
+      <ul>
+        <li v-for="states of statesRef" :key="states['.key']" style="list-style:none;">
+          <P>
+            Nazwa:
+            <b>{{states.value}}</b> Kalorie:
+            <b>{{states.calories}}</b>
+          </P>
+          <button @click="removeProduct(states['.key'])">Usuń</button>
+        </li>
+      </ul>
+    </div>
   </div>
-    <el-collapse v-model="activeName" accordion class="collapse--style" >
-  <el-collapse-item title="Lista" name="1"> 
-<div class="diet__summary">
-<li v-for="item in items" :key="item.index" class="diet__list">
-  <div class="product__summary">
-    <p>{{item.value}}</p> <p> {{item.sum}}</p>
-  </div>
-  </li>
-</div>
-
-  </el-collapse-item>
-
-</el-collapse>
-
-<div class="calculator__listOfLists">
-  <dietList
-  v-for="(list, index) in listsRef" 
-  v-bind:key="index"
-  v-bind:is="list"
-  @removeList="removeList($event)"
-  @addNewList="addNewList($event)"
-
-  @addItem="addItem($event)"
-  > </dietList>
-</div>
- 
- 
- 
-      </div>
-      
 </template>
 
 <script>
-
-import dietList from './dietList.vue'
-import { statesRef } from '../firebase'
-import {listsRef} from '../firebase'
-import {taskssRef} from '../firebase'
+import dietList from "./dietList.vue";
+import { statesRef } from "../firebase";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    dietList,
+    dietList
   },
   data() {
-      return {
-        lists: ['dietList'],
-        productName: '',
-        productCalories: '',
-       activeName: '1',
-        product: '',
-        listsRef: '',
-        listofProducts: [],
-        num: '',
-        statesRef: '',
-       qtySummary: '0',
-      items: [ {value: 'Nazwa:', sum: 'Waga:'} ],
-      }
-      },
-      firebase: {
-       listsRef: listsRef,
-    statesRef: statesRef,
-      },
+    return {
+      lists: [
+        {
+          id: 1,
+          name: 'Diet list'
+        },
+        {
+          id: 2,
+          name: 'another diet list'
+        },
+       
+      ],
+      productName: "",
+      productCalories: "",
+      activeName: "1",
+      product: "",
+      num: "",
+      statesRef: "",
+      qtySummary: "0",
+      items: [{ value: "Nazwa:", sum: "Waga:" }]
+    };
+  },
+  firebase: {
+    statesRef: statesRef
+  },
   methods: {
-     submitProduct(){
-     
-      statesRef.push({value:this.productName, label: this.productName, calories: this.productCalories, })
-      listofProducts.push(this.productName)
-      if(productName == listofProducts){
-        console.log('errr')
-      }
-       
-       
-     },
-     removeProduct(key){
-   console.log( this.states.key)
+    submitProduct() {
+      statesRef.push({
+        value: this.productName,
+        label: this.productName,
+        calories: this.productCalories
+      });
 
-     
-     },
-    
-    addNewList(){
-        console.log(this.lists)
-        listsRef.push('dietList')
+      console.log(statesRef);
     },
-    
-    removeList: function(list) {
-      console.log(this.lists)
-  this.lists.splice(this.lists.index, 1);
-},
-    
-    addItem(item) {
-       this.items.push(item)
-        var total = this.items.length -1;
-        var i = 0;  
-           
-           
-          for(; i < total; i++) {
-            if(this.items[i].value == item.value){
-            
-              item.sum = +this.items[i].sum + item.sum;
-              this.items[i].sum = item.sum;
-             
-              this.items.pop();
+    removeProduct(key) {
+      statesRef.remove();
+    },
 
-                  } else {
-                    item.sum = item.sum;
-                  }
-           }
-     },
+    addNewList() {
+      let idr = Math.random()
+      console.log(this.lists);
+      this.lists.push({id:idr, name: 'Nazwa Diety'});
+    },
+
+    removeList: function(id) {
+      let oldArray = this.lists;
+      oldArray = oldArray.filter(item => item.id !== id)
+      this.lists = oldArray
+    },
+
+    addItem(item) {
+      this.items.push(item);
+      var total = this.items.length - 1;
+      var i = 0;
+      for (; i < total; i++) {
+        if (this.items[i].value == item.value) {
+          item.sum = +this.items[i].sum + item.sum;
+          this.items[i].sum = item.sum;
+          this.items.pop();
+        } else {
+          item.sum = item.sum;
+        }
+      }
     }
-}
+  }
+};
 </script>
 
 <style>
-.board{
-  width:100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.board {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.collapse--style{
+.collapse--style {
   width: 80%;
 }
-.diet__score{
+.diet__score {
   width: 50%;
   padding: 20px;
 }
-.diet__summary{
+.diet__summary {
   background-color: grey;
   color: white;
 }
-.diet__list{
+.diet__list {
   list-style: none;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.calculator__listOfLists{
+.calculator__listOfLists {
   width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
 }
-.product__summary{
+.product__summary {
   display: flex;
   width: 30%;
   justify-content: center;
   align-items: center;
-
 }
 </style>
