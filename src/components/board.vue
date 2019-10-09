@@ -19,7 +19,7 @@
 
 <div class="calculator__listOfLists">
   <dietList
-  v-for="(list, index) in lists" 
+  v-for="(list, index) in listsRef" 
   v-bind:key="index"
   v-bind:is="list"
   @removeList="removeList($event)"
@@ -39,6 +39,8 @@
 
 import dietList from './dietList.vue'
 import { statesRef } from '../firebase'
+import {listsRef} from '../firebase'
+import {taskssRef} from '../firebase'
 
 export default {
   name: 'app',
@@ -52,6 +54,7 @@ export default {
         productCalories: '',
        activeName: '1',
         product: '',
+        listsRef: '',
         listofProducts: [],
         num: '',
         statesRef: '',
@@ -60,8 +63,8 @@ export default {
       }
       },
       firebase: {
-        
-    statesRef: statesRef
+       listsRef: listsRef,
+    statesRef: statesRef,
       },
   methods: {
      submitProduct(){
@@ -82,7 +85,7 @@ export default {
     
     addNewList(){
         console.log(this.lists)
-        this.lists.push('dietList')
+        listsRef.push('dietList')
     },
     
     removeList: function(list) {
@@ -94,15 +97,18 @@ export default {
        this.items.push(item)
         var total = this.items.length -1;
         var i = 0;  
+           
+           
           for(; i < total; i++) {
             if(this.items[i].value == item.value){
-                
-              item.sum = +this.items[i].sum + item.num;
+            
+              item.sum = +this.items[i].sum + item.sum;
               this.items[i].sum = item.sum;
+             
               this.items.pop();
 
                   } else {
-                    item.sum = item.num;
+                    item.sum = item.sum;
                   }
            }
      },

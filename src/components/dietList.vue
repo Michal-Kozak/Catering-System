@@ -5,8 +5,8 @@
         <div class="calculator__row">
             
             <div class="calculator__type">
-                  
-                <div class="list__name" contenteditable="true">
+                  <el-input-number v-model="dietqty" :min="1" size="small" :controls="false" style="  border-radius: 50%; width:10%;"></el-input-number>
+                <div class="list__name" contenteditable="true">       
            <h1>Name Of Diet</h1>
                 </div>
            <div >
@@ -51,6 +51,7 @@ import dietitem from './dietitem.vue'
       return {
           tasks: ['dietitem'],
        activeName: '1',
+       dietqty: '1',
         num: '',
         calloriesSummary: '',
       items: [
@@ -73,7 +74,8 @@ import dietitem from './dietitem.vue'
       
         const calloriessum = item.num * (item.calories /100);
             this.calloriesSummary = Math.round(+this.calloriesSummary + calloriessum);
-            
+             item.sum = +item.num * +this.dietqty;
+               console.log(item.sum)
         this.$emit('addItem', item); 
      
      this.items.push(item)    

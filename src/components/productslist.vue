@@ -41,7 +41,7 @@ export default {
  
   data() {
       return {
-
+          statesRef : '',
         productName: '',
         productCalories: '',
       }
@@ -54,6 +54,7 @@ export default {
      submitProduct(){
      
       statesRef.push({value:this.productName, label: this.productName, calories: this.productCalories, })
+        
       listofProducts.push(this.productName)
       if(productName == listofProducts){
         console.log('errr')

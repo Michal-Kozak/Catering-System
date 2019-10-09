@@ -17,4 +17,7 @@ const app = initializeApp( {
  
   export const db = app.database();
   export const statesRef = db.ref('states');
+  
+  export const listsRef = db.ref('lists');
+ 
    

@@ -66,28 +66,25 @@ import { statesRef } from '../firebase'
     firebase: {
         statesRef: statesRef
       },
-    mounted() {
-      this.list = this.statesRef.map(item => {
-        return { value: item, label: item };
-      });
-    },
+    
     methods: {
       
      
       addItem() {
+        
       this.disabled = true;
      var total = 999;
         var i = 0;  
           for(; i < total; i++) {
             if(this.statesRef[i].value == this.item.value){
                 this.item.calories = this.statesRef[i].calories;
-                console.log(this.item.caloriers)
-                console.log(this.statesRef[i].calories)
+              
+
                 this.$emit('addItem', this.item); 
                   }else if (this.statesRef[i].calories < 20){
                     this.statesRef[i].calories = this.item.calories;
 
-                    console.log('test')
+                   
                   }} 
            
     },
