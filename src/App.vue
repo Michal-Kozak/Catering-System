@@ -3,10 +3,8 @@
 <template>
   <div id="app" >
   
-  
-    <board>
-  
-   </board>
+  <router-view> </router-view>
+    
    
   </div>
   
@@ -21,6 +19,7 @@ export default {
   components: {
     board,
     sideMenu,
+    
   }
 }
 </script>

@@ -1,5 +1,8 @@
 <template>
   <div class="board" > 
+    <div>
+  <router-link to="/productlist"> <el-button type="primary">Lista Produktów</el-button>  </router-link>
+  </div>
     <el-collapse v-model="activeName" accordion class="collapse--style" >
   <el-collapse-item title="Lista" name="1"> 
 <div class="diet__summary">
@@ -13,6 +16,7 @@
   </el-collapse-item>
 
 </el-collapse>
+
 <div class="calculator__listOfLists">
   <dietList
   v-for="(list, index) in lists" 
@@ -20,20 +24,13 @@
   v-bind:is="list"
   @removeList="removeList($event)"
   @addNewList="addNewList($event)"
+
   @addItem="addItem($event)"
   > </dietList>
 </div>
-  <div>
-    <label>Produkt: </label>
-    <input type="text" v-model="productName"/>
-    <input type="number" v-model="productCalories"/>
-    <button @click="submitProduct()">ADD </button>
-    <ul>
-      <li v-for="states of statesRef" :key="states['.key']" style="list-style:none;"><P>Nazwa: <b>{{states.value}}</b> Kalorie: <b>{{states.calories}}</b></P> 
-      <button @click="removeProduct(states['.key'])">Usuń</button> 
-      </li>
-    </ul>
-  </div>
+ 
+ 
+ 
       </div>
       
 </template>
@@ -55,6 +52,7 @@ export default {
         productCalories: '',
        activeName: '1',
         product: '',
+        listofProducts: [],
         num: '',
         statesRef: '',
        qtySummary: '0',
@@ -62,18 +60,24 @@ export default {
       }
       },
       firebase: {
-        statesRef: statesRef
+        
+    statesRef: statesRef
       },
   methods: {
      submitProduct(){
-       statesRef.push({value:this.productName, label: this.productName, calories: this.productCalories})
+     
+      statesRef.push({value:this.productName, label: this.productName, calories: this.productCalories, })
+      listofProducts.push(this.productName)
+      if(productName == listofProducts){
+        console.log('errr')
+      }
        
-       
-       console.log(statesRef)
        
      },
      removeProduct(key){
-      statesRef.remove();
+   console.log( this.states.key)
+
+     
      },
     
     addNewList(){

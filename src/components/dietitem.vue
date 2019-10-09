@@ -2,6 +2,7 @@
   <div class="calculator__product" v-bind:class="{ 'calculator__disabled': disabled }">
     <div class="calculator__qty" >
                 <el-select
+                class="small-medium"
     v-model="item.value"
     v-bind:class="{ 'calculator__disabled--input': disabled }"
      size="small"
@@ -23,11 +24,13 @@
  
   </el-select>
 
-                    <el-input-number v-model="item.num"  :min="1"  size="small" v-bind:class="{ 'calculator__disabled--input': disabled }" ></el-input-number>
+                    <el-input-number v-model="item.num" class="small-small"  :min="1"  size="small" v-bind:class="{ 'calculator__disabled--input': disabled }"  :controls="false"></el-input-number>
                     <el-button 
                     type="success" 
                     icon="el-icon-check" 
                     circle 
+                   
+                    
                   v-bind:class="{ 'calculator__disabled--add': disabled }"
                     @click="addItem"
                     
@@ -96,9 +99,15 @@ import { statesRef } from '../firebase'
   }
 </script>
 <style>
+.small-medium{
+  width: 35%
+}
+.small-small{
+width: 25%
+}
 .calculator__qty{
   display:flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   margin-bottom: 5px;
 }
