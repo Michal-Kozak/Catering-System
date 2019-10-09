@@ -36,7 +36,13 @@
                     
                     ></el-button>
                     
-          <el-button type="danger" icon="el-icon-delete" circle @click="removeItem"></el-button>
+          <el-button 
+          type="danger" 
+          icon="el-icon-delete" 
+          circle 
+          @click="removeItem" 
+          v-bind:class="{ 'calculator__antydisabled': disabled }">
+          </el-button>
                     
                    
                     </div>
@@ -86,6 +92,7 @@ import { statesRef } from '../firebase'
       addItem() {
         
       this.disabled = true;
+      this.antydisabled= false;
      var total = 999;
         var i = 0;  
           for(; i < total; i++) {
@@ -133,8 +140,12 @@ width: 25%
 }
 .calculator__disabled{
   background-color: gainsboro;
-  opacity: 0.7;
+
   pointer-events: none;
+}
+.calculator__antydisabled{
+
+  pointer-events:all;
 }
 .calculator__disabled--add{
   display: none;
