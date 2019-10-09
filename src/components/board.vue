@@ -24,22 +24,7 @@
         @addItem="addItem($event)"
       ></dietList>
     </div>
-    <div>
-      <label>Produkt:</label>
-      <input type="text" v-model="productName" />
-      <input type="number" v-model="productCalories" />
-      <button @click="submitProduct()">ADD</button>
-      <ul>
-        <li v-for="states of statesRef" :key="states['.key']" style="list-style:none;">
-          <P>
-            Nazwa:
-            <b>{{states.value}}</b> Kalorie:
-            <b>{{states.calories}}</b>
-          </P>
-          <button @click="removeProduct(states['.key'])">Usuń</button>
-        </li>
-      </ul>
-    </div>
+    
   </div>
 </template>
 
@@ -57,11 +42,11 @@ export default {
       lists: [
         {
           id: 1,
-          name: 'Diet list'
+          name: 'Nazwa Diety'
         },
         {
           id: 2,
-          name: 'another diet list'
+          name: 'Nazwa Diety'
         },
        
       ],

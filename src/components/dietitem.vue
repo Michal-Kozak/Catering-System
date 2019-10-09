@@ -36,6 +36,8 @@
                     
                     ></el-button>
                     
+          <el-button type="danger" icon="el-icon-delete" circle @click="removeItem"></el-button>
+                    
                    
                     </div>
                    
@@ -58,18 +60,29 @@ import { statesRef } from '../firebase'
         input: '',
         options: [],
         callories: '',
-        list: [],
         loading: false,
         statesRef: []
       }
     },
+   
     firebase: {
         statesRef: statesRef
       },
-    
+     props: {
+    index: {
+      type: Number,
+      required: true,
+    },
+    task: {
+      type: Object,
+      required: true,
+    },
+  },
     methods: {
       
-     
+     removeItem(){
+      this.$emit("removeItem", this.task.id);
+     },
       addItem() {
         
       this.disabled = true;

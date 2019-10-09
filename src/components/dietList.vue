@@ -13,10 +13,13 @@
       </div>
 
       <dietitem
-        v-for="task in tasks"
-        v-bind:key="task.id"
-        v-bind:is="task"
+        v-for="(task, index) in tasks"
+         :key="index"
+        :task="task"
+        :index="index"
+        
         @addItem="addItem($event)"
+        @removeItem="removeItem($event)"
         @caloriescalc="caloriescalc($event)"
       ></dietitem>
 
@@ -37,12 +40,16 @@ export default {
   },
   data() {
     return {
-      tasks: [],
+      tasks: [
+        {
+          id: 1,
+        },
+      ],
       dietqty: '1',
       activeName: "1",
       num: "",
       calloriesSummary: "",
-      items: []
+      
     };
   },
   props: {
@@ -54,13 +61,22 @@ export default {
       type: Object,
       required: true,
     },
+
   },
   methods: {
     addNewItem() {
-      this.tasks.push("dietitem");
+      let idr = Math.random()
+      console.log(this.tasks);
+      this.tasks.push({id:idr});
+
     },
     addNewList() {
       this.$emit("addNewList");
+    },
+      removeItem: function(id) {
+      let oldtasksArray = this.tasks;
+      oldtasksArray = oldtasksArray.filter(item => item.id !== id)
+      this.tasks = oldtasksArray
     },
     removeList() {
       this.$emit("removeList", this.list.id);
