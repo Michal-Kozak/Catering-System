@@ -2,7 +2,8 @@
   <div class="calculator">
     <div class="calculator__row">
       <div class="calculator__type">
-        <el-input-number v-model="dietqty" :min="1" size="small" :controls="false" style="  border-radius: 50%; width:10%;"></el-input-number>
+        <el-input-number v-model="dietqty" :min="0" size="small" :controls="false" style="  border-radius: 50%; width:10%;"></el-input-number>
+       
         <div class="list__name" contenteditable="true">
           <h1>{{ list.name }}</h1>
         </div>
@@ -43,6 +44,15 @@ export default {
       tasks: [
         {
           id: 1,
+          taskname: 'taskanme1'
+        },
+        {
+          id: 2,
+          taskname: 'taskanme2'
+        },
+        {
+          id: 3,
+          taskname: 'taskanme3'
         },
       ],
       dietqty: '1',
@@ -65,9 +75,9 @@ export default {
   },
   methods: {
     addNewItem() {
-      let idr = Math.random()
+      let idr = Math.floor(Math.random() * 90);
       console.log(this.tasks);
-      this.tasks.push({id:idr});
+      this.tasks.push({id:idr, taskname: 'taskname'+idr});
 
     },
     addNewList() {
@@ -81,6 +91,7 @@ export default {
     removeList() {
       this.$emit("removeList", this.list.id);
     },
+  
     addItem(item) {
       const calloriessum = item.num * (item.calories / 100);
       this.calloriesSummary = Math.round(+this.calloriesSummary + calloriessum);

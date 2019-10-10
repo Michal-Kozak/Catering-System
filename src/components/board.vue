@@ -42,11 +42,19 @@ export default {
       lists: [
         {
           id: 1,
-          name: 'Nazwa Diety'
+          name: 'Nazwa Diety1'
         },
         {
           id: 2,
-          name: 'Nazwa Diety'
+          name: 'Nazwa Diety2'
+        },
+        {
+          id: 3,
+          name: 'Nazwa Diety3'
+        },
+        {
+          id: 4,
+          name: 'Nazwa Diet4'
         },
        
       ],
@@ -78,9 +86,9 @@ export default {
     },
 
     addNewList() {
-      let idr = Math.random()
+      let idr = Math.floor(Math.random() * 90);
       console.log(this.lists);
-      this.lists.push({id:idr, name: 'Nazwa Diety'});
+      this.lists.push({id:idr, name: 'dietname'+idr});
     },
 
     removeList: function(id) {
