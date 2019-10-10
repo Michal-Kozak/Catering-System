@@ -54,6 +54,18 @@ export default {
           id: 3,
           taskname: 'taskanme3'
         },
+         {
+          id: 4,
+          taskname: 'taskanme4'
+        },
+         {
+          id: 5,
+          taskname: 'taskanme5'
+        },
+         {
+          id: 6,
+          taskname: 'taskanme6'
+        },
       ],
       dietqty: '1',
       activeName: "1",
