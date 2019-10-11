@@ -44,6 +44,7 @@ export default {
           statesRef : '',
         productName: '',
         productCalories: '',
+        oldproductArray: [],
       }
       },
       firebase: {
@@ -52,8 +53,8 @@ export default {
       },
   methods: {
      submitProduct(){
-     
-      statesRef.push({value:this.productName, label: this.productName, calories: this.productCalories, })
+     let idr = Math.floor(Math.random() * 90);
+      statesRef.push({value:this.productName, label: this.productName, calories: this.productCalories, id: idr })
         
       listofProducts.push(this.productName)
       if(productName == listofProducts){
@@ -62,10 +63,13 @@ export default {
        
        
      },
-     removeProduct(key){
-   console.log( this.states.key)
-
      
+   removeProduct: function(id) {
+      let oldproductArray  = this.oldproductArray
+      this.oldproductArray = this.oldproductArray.filter(item => item.id !== id)
+      statesRef = this.oldproductArray
+      console.log(this.oldproductArray)
+  
      },
 
     addItem(item) {

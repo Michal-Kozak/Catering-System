@@ -81,7 +81,7 @@ export default {
 
       console.log(statesRef);
     },
-    removeProduct(key) {
+    removeProduct: function(id) {
       statesRef.remove();
     },
 

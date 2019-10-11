@@ -67,7 +67,8 @@ import { statesRef } from '../firebase'
         options: [],
         callories: '',
         loading: false,
-        statesRef: []
+        statesRef: [],
+      
       }
     },
    

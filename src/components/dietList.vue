@@ -2,7 +2,7 @@
   <div class="calculator">
     <div class="calculator__row">
       <div class="calculator__type">
-        <el-input-number v-model="dietqty" :min="0" size="small" :controls="false" style="  border-radius: 50%; width:10%;"></el-input-number>
+        <el-input-number v-model="dietqty" :min="0" size="small" :controls="false" style="  border-radius: 50%; width:30%;"></el-input-number>
        
         <div class="list__name" contenteditable="true">
           <h1>{{ list.name }}</h1>
@@ -28,7 +28,9 @@
         <el-button type="primary" icon="el-icon-plus" round style="width:60%;" @click="addNewItem"></el-button>
       </div>
       <p>{{calloriesSummary}} KCAL</p>
+      
     </div>
+    
   </div>
 </template>
 
@@ -50,22 +52,7 @@ export default {
           id: 2,
           taskname: 'taskanme2'
         },
-        {
-          id: 3,
-          taskname: 'taskanme3'
-        },
-         {
-          id: 4,
-          taskname: 'taskanme4'
-        },
-         {
-          id: 5,
-          taskname: 'taskanme5'
-        },
-         {
-          id: 6,
-          taskname: 'taskanme6'
-        },
+        
       ],
       dietqty: '1',
       activeName: "1",
@@ -83,7 +70,6 @@ export default {
       type: Object,
       required: true,
     },
-
   },
   methods: {
     addNewItem() {
@@ -96,9 +82,9 @@ export default {
       this.$emit("addNewList");
     },
       removeItem: function(id) {
-      let oldtasksArray = this.tasks;
-      oldtasksArray = oldtasksArray.filter(item => item.id !== id)
-      this.tasks = oldtasksArray
+      let oldtasksArrayx = this.tasks;
+      oldtasksArrayx = oldtasksArrayx.filter(item => item.id !== id)
+      this.tasks = oldtasksArrayx
     },
     removeList() {
       this.$emit("removeList", this.list.id);
