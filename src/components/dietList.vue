@@ -51,6 +51,24 @@ export default {
         {
           id: 2,
           taskname: 'taskanme2'
+        },{
+          id: 3,
+          taskname: 'taskanme3'
+        },{
+          id: 4,
+          taskname: 'taskanme4'
+        },{
+          id: 5,
+          taskname: 'taskanme5'
+        },{
+          id: 6,
+          taskname: 'taskanme6'
+        },{
+          id: 7,
+          taskname: 'taskanme7'
+        },{
+          id: 8,
+          taskname: 'taskanme8'
         },
         
       ],
