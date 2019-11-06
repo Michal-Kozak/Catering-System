@@ -1,33 +1,30 @@
 <template>
 
   <div class="productlist">
-       <router-link to="/"> <el-button type="primary">Kalkulator</el-button>  </router-link>
-      <h1>Dodaj produkt do bazy </h1>
-      <div  style="display:flex; justify-content:center; flex-direction:column; align-items:center;">
-          
-          <el-form :inline="true"  class="demo-form-inline" style="border-bottom:2px solid #409EFF; width:45%;">
-  <el-form-item label="Nazwa Produktu:">
-    <el-input v-model="productName" ></el-input>
-  </el-form-item>
-
-  <el-form-item label="Kaloryczność:">
-    <el-input v-model="productCalories"></el-input>
-  </el-form-item>
-
-  <el-form-item>
-    <el-button type="primary" @click="submitProduct()">Dodaj</el-button>
-  </el-form-item>
-  
-</el-form >
-
-          
-    <ul>
-      <li v-for="states of statesRef" v-bind:key="states['.key']" style="list-style:none;">
-          <p> Produkt: <b> {{states.value}}</b> Kaloryczność: <b> {{states.calories}} </b> </p>
-      <button @click="removeProduct(statesRef.key)">Usuń</button> 
-      </li>
-    </ul>
-      </div>
+     <router-link to="/"> <el-button type="primary">Kalkulator</el-button>  </router-link><br>
+       <div>
+      <label>Nazwa: </label>
+      <input type="text" v-model="productName"> <br>
+        <label> Kalorie: </label>
+      <input type="text" v-model="productCalories"><br>
+      <button @click="submitName()" style="width:230px;">Add</button>
+    </div>
+    <div>
+      <ul>
+        <li v-for="personName of names" v-bind:key="personName['.key']" style=" list-style-type:none;">
+          <div v-if="personName.edit">
+            <input type="text" v-model="personName.name">
+            <button @click="saveEdit(personName)">Save</button>
+            <button @click="cancelEdit(personName)">Cancel</button>
+          </div>
+          <div v-else>
+            <p> Nazwa: <b>{{personName.value}}</b> <b> | </b> Kaloryczność: <b>{{personName.calories}}</b></p>
+            <button @click="removeName(personName)">Remove</button>
+            
+          </div>
+        </li>
+      </ul>
+    </div>
       
       </div>
 </template>
@@ -41,36 +38,31 @@ export default {
  
   data() {
       return {
-          statesRef : '',
+          
         productName: '',
         productCalories: '',
         oldproductArray: [],
+        names: [],
       }
       },
       firebase: {
         
-    statesRef: statesRef
+    names: statesRef
       },
   methods: {
-     submitProduct(){
+     submitName(){
      let idr = Math.floor(Math.random() * 90);
       statesRef.push({value:this.productName, label: this.productName, calories: this.productCalories, id: idr })
-        
-      listofProducts.push(this.productName)
-      if(productName == listofProducts){
-        console.log('errr')
-      }
-       
-       
-     },
+      
      
-   removeProduct: function(id) {
-      let oldproductArray  = this.oldproductArray
-      this.oldproductArray = this.oldproductArray.filter(item => item.id !== id)
-      statesRef = this.oldproductArray
-      console.log(this.oldproductArray)
-  
+       
+       
      },
+     removeName(name) {
+     statesRef.child(name['.key']).remove();
+    },
+     
+  
 
     addItem(item) {
        this.items.push(item)
@@ -105,5 +97,28 @@ export default {
     display: flex;
     flex-direction: column;
     width: 20%;
+}
+
+h1,
+h2 {
+  font-weight: normal;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 0 10px;
+}
+
+a {
+  color: #42b983;
+}
+
+button {
+  background-color: transparent;
+  border: 2px solid black;
 }
 </style>
