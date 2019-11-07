@@ -7,7 +7,7 @@
       <input type="text" v-model="productName"> <br>
         <label> Kalorie: </label>
       <input type="text" v-model="productCalories"><br>
-      <button @click="submitName()" style="width:230px;">Add</button>
+      <button @click="submitName()" style="width:230px;">Dodaj</button>
     </div>
     <div>
       <ul>
@@ -19,7 +19,7 @@
           </div>
           <div v-else>
             <p> Nazwa: <b>{{personName.value}}</b> <b> | </b> Kaloryczność: <b>{{personName.calories}}</b></p>
-            <button @click="removeName(personName)">Remove</button>
+            <button @click="removeName(personName)">Usuń</button>
             
           </div>
         </li>
